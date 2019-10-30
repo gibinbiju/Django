@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "formapp/base.html" %}
+    {% block body_block%}
+<h1>RegisterHere</h1>
+
+<table>
+    <form action="" method="">
+         {% csrf_token %}
+        {{form.as_p}}
+        <tr>
+            <td>
+        <input type="submit" value="Register">
+        </td>
+        </tr>
+
+    </form>
+
+</table>
+    {% endblock %}

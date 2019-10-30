@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+    {% block body_block%}
+<table>
+ <form action="{%url 'find' %}" method="post">
+         {% csrf_token %}
+     <tr>
+<td><input type="text" name="sname"></td>
+         <td><input type="text" name="course"></td>
+
+         <td>
+        <input type="submit" value="Search">
+        </td>
+     </tr>
+ </form>
+</table>
+
+
+
+
+ {% endblock %}
