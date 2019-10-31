@@ -4,7 +4,7 @@
 <h1>RegisterHere</h1>
 
 <table>
-    <form action="" method="">
+    <form action="{% url 'save' %}" method="post">
          {% csrf_token %}
         {{form.as_p}}
         <tr>
