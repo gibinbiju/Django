@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+    {% block body_block%}
+<h1>Student Details</h1>
+<style>
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+</style>
+<table style="width:50%">
+    <tr>
+        <th>EName</th>
+        <th>ESal  </th>
+        <th>Company </th>
+        <th>Desig</th>
+    </tr>
+    {% for val in object_list %}
+
+    <tr>
+        <td>{{val.ename}}</td>
+        <td>{{val.esal}}</td>
+        <td>{{val.companyname}}</td>#
+        <td>{{val.designation}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+    {% endblock %}

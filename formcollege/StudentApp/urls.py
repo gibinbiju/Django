@@ -22,6 +22,6 @@ urlpatterns = [
     path("register",views.insertToStudent,name="insert"),
     path("view",views.getStudentDetails,name="fetch"),
     path("search",views.search,name="search"),
-    path("find", views.searchstudent, name="find"),
+    path("find", views.searchstudent , name="find"),
 
 ]
