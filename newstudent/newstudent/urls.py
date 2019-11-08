@@ -20,8 +20,5 @@ from django.shortcuts import render
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('django.contrib.auth.urls')),
-    path('',lambda request:render(request,'registration/home.html'),name='home'),
-
-    path('/success', lambda request: render(request, 'registration/success.html'), name='success'),
-
+    path('',include('student.urls')),
 ]
