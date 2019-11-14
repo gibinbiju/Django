@@ -54,10 +54,13 @@ class expenseform(forms.ModelForm):
         model = expense
         fields=['category_name','amount']
 
-        def form_valid(self, form):
-            form.instance.name = self.request.user
-            return super().form_valid(form)
+        # def form_valid(self, form):
+        #     form.instance.name = self.request.user
+        #     return super().form_valid(form)
 class searchform(forms.ModelForm):
     class Meta():
         model = expense
         fields=['dates']
+        widgets={
+            'dates':forms.SelectDateWidget,
+        }

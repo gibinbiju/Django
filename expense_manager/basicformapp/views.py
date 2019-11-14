@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from basicformapp.forms import newuserform,login,expenseform,searchform
 from .models import users,expense,category
+from django.db.models import Min,Max,Sum
 # Create your views here.
 # def index(request):
     # return render(request, 'basicformapp/users.html', {'form':form})
@@ -52,7 +53,11 @@ def expenseview(request):
     if request.method=="POST":
         form=expenseform(request.POST)
         if form.is_valid():
-            form.save(commit=True)
+            u=users.objects.get(username=request.session['user'])
+            category=form.cleaned_data['category_name']
+            amount=form.cleaned_data['amount']
+            e=expense(name=u,category_name=category,amount=amount)
+            e.save()
             print("Success")
             # return index(request)
             return render(request, 'expense2.html', {'form': form})
@@ -68,15 +73,22 @@ def search(request):
         return render(request, 'search.html', {'form': form})
     if request.method=='POST':
         form=searchform(request.POST)
-        if request.POST.get('max'):
-            u=expense.objects.filter(dates='dates').aggregate(Max('amount'))
-            return render(request, 'search2.html', {'u': u,'form':form})
-        elif request.POST.get('min'):
-            u=expense.objects.filter(dates='dates').aggregate(Min('amount'))
-            return render(request, 'search2.html', {'u': u,'form':form})
-        elif request.POST.get('total'):
-            u = expense.objects.aggregate(Count('amount'))
-            return render(request, 'search2.html', {'u': u,'form':form})
-        else:
-            u = expense.objects.filter(dates='dates')
-            return render(request, 'search2.html', {'u': u,'form':form})
+        if form.is_valid():
+            dates = form.cleaned_data['dates']
+            if request.POST.get('max'):
+                u = expense.objects.filter(dates=dates).aggregate(Max('amount'))
+                print("Max operation")
+                return render(request, 'search2.html', {'u': u,})
+            elif request.POST.get('min'):
+                u = expense.objects.filter(dates=dates).aggregate(Min('amount'))
+                print("Min operation")
+                return render(request, 'search2.html', {'u': u,})
+            elif request.POST.get('total'):
+                u = expense.objects.aggregate(Sum('amount'))
+                print("total expense operation")
+                return render(request, 'search2.html', {'u': u})
+            else:
+                u = expense.objects.filter(dates=dates)
+                print("Full data operation")
+                return render(request, 'search2.html', {'u':u})
+    return render(request,'search.html',{'form':form})

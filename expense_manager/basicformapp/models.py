@@ -22,5 +22,6 @@ class expense(models.Model):
     amount=models.FloatField()
     dates=models.DateField(default=datetime.now)
     def __str__(self):
-        return self.amount,self.category_name
+        template = '{0.name} {0.category_name} {0.dates} {0.amount}'
+        return template.format(self)
 

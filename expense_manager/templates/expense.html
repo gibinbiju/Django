@@ -7,7 +7,8 @@
 <body>
 <div class="container">
 <form method="post">
-
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'logout' %}">Logout</a>&nbsp;</br>
     {% csrf_token %}
 {{form.as_p}}
 

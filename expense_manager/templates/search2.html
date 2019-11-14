@@ -5,16 +5,15 @@
     <title>Search</title>
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-{{form.as_p}}
-    <input type="submit" name="max" value="Max">
-    <input type="submit" name="full" value="Full">
-    <input type="submit" name="min" value="Min">
-    <input type="submit" name="total" value="Total">
+<a href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'search' %}">Perform Aggregate Functions</a>
+
 </br>
     </br>
     {{u}}
-</form>
+    </br>
+    </br>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+
 </body>
 </html>
